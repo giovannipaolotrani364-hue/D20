@@ -26,7 +26,7 @@ public class ProdottoBean implements Serializable{
 		this.numeroGiocatoriMin=0;
 		this.numeroGiocatoriMax=0;
 		this.etaMinima=0;
-		this.etaMinima=0;
+		this.durataMinuti=0;
 		
 	}
 
