@@ -1,18 +1,19 @@
 package model;
 
 import java.io.Serializable;
+import java.security.Timestamp;
 
 public class ordineBean implements Serializable {
 	private int idordine;
 	private int idutente;
-	private String dataOrdine;
+	private Timestamp dataOrdine;
 	private float totale;
 	private String indirizzoSpedizione;
 	
 	public ordineBean() {
 		this.idordine=0;
 		this.idutente=0;
-		this.dataOrdine="";
+		this.dataOrdine=null;
 		this.totale=0;
 		this.indirizzoSpedizione="";
 	}
@@ -33,11 +34,11 @@ public class ordineBean implements Serializable {
 		this.idutente = idutente;
 	}
 
-	public String getDataOrdine() {
+	public Timestamp getDataOrdine() {
 		return dataOrdine;
 	}
 
-	public void setDataOrdine(String dataOrdine) {
+	public void setDataOrdine(Timestamp dataOrdine) {
 		this.dataOrdine = dataOrdine;
 	}
 
