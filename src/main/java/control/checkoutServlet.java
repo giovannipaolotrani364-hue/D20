@@ -33,12 +33,18 @@ public class checkoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session=request.getSession();
+		utenteBean utente=(utenteBean) session.getAttribute("utente");
+		if(utente == null) {
+			response.sendRedirect("login.jsp");
+			return;
+		}
+		int idutente= utente.getIdutente();
 		cart cart = (cart) session.getAttribute("carello");
 		String indirizzo= request.getParameter("idirizzo");
 		
 		if(cart != null && !cart.getItems().isEmpty() && indirizzo != null && indirizzo.trim().isEmpty()) {
-			utenteBean utente= (utenteBean) session.getAttribute("utente");
-			int idutente= (utente != null) ? utente.getIdutente() :1;
+			
+			
 			ordineBean orderBean = new ordineBean();
 			orderBean.setIdutente(idutente);
 			orderBean.setIndirizzoSpedizione(indirizzo);

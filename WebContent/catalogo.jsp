@@ -9,6 +9,20 @@
 <title>Catalogo Giochi da tavolo</title>
 </head>
 <body>
+<div class="user-header" style="background-color: #f4f4f4; padding: 10px; margin-bottom: 20px; text-align: right;">
+	<c:choose>
+		<c:when test="${not empty sessionScope.utente}">
+		<span> benvenuto, $sessionScope.utente.nome }</span>
+		<a href="loginServlet?=logout">logout</a>
+		</c:when>
+	</c:choose>
+	<c:otherwise>
+		<a href="login.jsp"> accedi</a>
+		<a href="registrazione.jsp"> registrati</a>
+	</c:otherwise>
+	<a href="carello.jsp"> carello (${not empty sessionScope.carello ? sessioneScope.carello.items.size() :0}</a>
+</div>
+
 <h1>Catalogo giochi da tavolo</h1>
 	<div class="product-grid">
 	<c:forEach var="prod" items="${prodotti}">
