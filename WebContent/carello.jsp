@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>il tuo carello</title>
+<link rel="stylesheet" type="text/css" />
 </head>
 <body>
 <h1> Carello dei giochi</h1>
 <c:choose>
-	<c:when test:"${empty sessionScope.carello || empty sessionScope.carello.items}">
+	<c:when test="${empty sessionScope.carello || empty sessionScope.carello.items}">
 	<p>il tuo carello e attualemte vuoto </p>
 	<p> <a href="catalogoServlet"> torna al catalogo servlet</a></p>
 	</c:when>
@@ -26,7 +28,7 @@
 				</tr>
 				</thead>
 				<tbody>
-					<c:forEach var:"item" items="${sessionScope.carello.itemas}">
+					<c:forEach var="item" items="${sessionScope.carello.itemas}">
 						<tr>
 							<td>${item.prodotto.titolo}</td>
 							<td>${item.prodotto.prezzo}</td>
