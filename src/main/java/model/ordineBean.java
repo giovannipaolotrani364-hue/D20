@@ -2,13 +2,19 @@ package model;
 
 import java.io.Serializable;
 import java.security.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ordineBean implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private int idordine;
 	private int idutente;
-	private Timestamp dataOrdine;
-	private float totale;
 	private String indirizzoSpedizione;
+	private float totale;
+	private Timestamp dataOrdine;
+	private List<dettaglioOrdineBean> articoli;
 	
 	public ordineBean() {
 		this.idordine=0;
@@ -16,6 +22,7 @@ public class ordineBean implements Serializable {
 		this.dataOrdine=null;
 		this.totale=0;
 		this.indirizzoSpedizione="";
+		this.setArticoli(new ArrayList<>());
 	}
 
 	public int getIdordine() {
@@ -56,6 +63,14 @@ public class ordineBean implements Serializable {
 
 	public void setIndirizzoSpedizione(String indirizzoSpedizione) {
 		this.indirizzoSpedizione = indirizzoSpedizione;
+	}
+
+	public List<dettaglioOrdineBean> getArticoli() {
+		return articoli;
+	}
+
+	public void setArticoli(List<dettaglioOrdineBean> articoli) {
+		this.articoli = articoli;
 	}
 	
 
