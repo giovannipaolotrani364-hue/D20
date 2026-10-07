@@ -25,7 +25,8 @@ public class registrazioneServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/registrazione.jsp"); 
+		dispatcher.forward(request, response);
 	}
 
 
@@ -44,7 +45,7 @@ public class registrazioneServlet extends HttpServlet {
 			try {
 				utenteDAO.doSave(newutente);
 				request.setAttribute("message", "registrazione completata con sucesso");
-				RequestDispatcher dispatcher= request.getRequestDispatcher("login.jsp");
+				RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/view/login.jsp");
 				dispatcher.forward(request, response);
 				return;
 			} catch (SQLException e) {
@@ -55,7 +56,7 @@ public class registrazioneServlet extends HttpServlet {
 			request.setAttribute("error", "tutti i campi sono obligatori");
 			
 		}
-		RequestDispatcher dispatcher= request.getRequestDispatcher("registrazione.jsp");
+		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/view/registrazione.jsp");
 		dispatcher.forward(request, response);
 	}
 

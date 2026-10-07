@@ -26,14 +26,15 @@ public class loginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action= request.getParameter("action");
-		if("logout".equals(action)) {
+		if("logout".equalsIgnoreCase(action)) {
 			HttpSession session=request.getSession(false);
 			if(session!=null) {
 				session.invalidate();
 			}
 			response.sendRedirect("catalogoServlet");
 		}else {
-			response.sendRedirect("login.jsp");
+			RequestDispatcher dispatcher =request.getRequestDispatcher("/WEB-INF/view/login.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 
@@ -62,7 +63,7 @@ public class loginServlet extends HttpServlet {
 	}else {
 		request.setAttribute("error", "insersci sia l'email ed la password");
 	}
-		RequestDispatcher dispatcher= request.getRequestDispatcher("login.jsp");
+		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/view/login.jsp");
 		dispatcher.forward(request, response);
 	}
 }

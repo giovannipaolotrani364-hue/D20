@@ -35,14 +35,16 @@ public class checkoutServlet extends HttpServlet {
 		HttpSession session=request.getSession();
 		utenteBean utente=(utenteBean) session.getAttribute("utente");
 		if(utente == null) {
-			response.sendRedirect("login.jsp");
+			request.setAttribute("error", "Devi effettuare il login per completare l'ordine.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/login.jsp"); 
+			dispatcher.forward(request, response);
 			return;
 		}
 		int idutente= utente.getIdutente();
 		cart cart = (cart) session.getAttribute("carello");
-		String indirizzo= request.getParameter("idirizzo");
+		String indirizzo= request.getParameter("indirizzo");
 		
-		if(cart != null && !cart.getItems().isEmpty() && indirizzo != null && indirizzo.trim().isEmpty()) {
+		if(cart != null && !cart.getItems().isEmpty() && indirizzo != null && !indirizzo.trim().isEmpty()) {
 			
 			
 			ordineBean orderBean = new ordineBean();
@@ -56,14 +58,18 @@ public class checkoutServlet extends HttpServlet {
 				request.setAttribute("totalepagato",cart.getTotale());
 				cart.svuota();
 				
-				RequestDispatcher dispatcher= request.getRequestDispatcher("confermaOrdine");
+				RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/view/confermaOrdine.jsp");
 				dispatcher.forward(request, response);
 			} catch (SQLException e) {
 				e.printStackTrace();
-				response.sendRedirect("carello.jsp?error1");
+				request.setAttribute("error","Errore durante il salvataggio dell'ordine.");
+				RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/view/carello.jsp");
+				dispatcher.forward(request, response);
+				
 			}
 		} else {
-			response.sendRedirect("carello.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/carrello.jsp"); 
+			dispatcher.forward(request, response);
 		}
 	}
 

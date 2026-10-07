@@ -1,5 +1,6 @@
 package control;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,8 +10,6 @@ import jakarta.servlet.http.HttpSession;
 import model.ProdottiDAODataSource;
 import model.ProdottoBean;
 import model.cart;
-import model.cart;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -43,20 +42,23 @@ public class carelloServlet extends HttpServlet {
 				if(azione.equals("add")) {
 					int idProdotto= Integer.parseInt(request.getParameter("idProdotto"));
 					ProdottoBean prodotto=prodottoDao.doRetrieveByKey(idProdotto);
-					if(prodotto !=null && prodotto.getIdProdotto() !=0) {}
-					cart.addProdotto(prodotto);
-				}
+					if(prodotto !=null && prodotto.getIdProdotto() !=0) {
+						cart.addProdotto(prodotto);
+					}
+				
 			}else if(azione.equalsIgnoreCase("delete")) {
 				int idProdotto=Integer.parseInt(request.getParameter("idProdotto"));
-				cart.remuveProdotto(idProdotto);
-			}else if (azione.equals("clear")) {
+				cart.remuveProdotto(idProdotto);;
+			}else if (azione.equalsIgnoreCase("clear")) {
 				cart.svuota();
+			}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("carello.jsp");
+		RequestDispatcher dispatcher =request.getRequestDispatcher("/WEB-INF/view/carrello.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	

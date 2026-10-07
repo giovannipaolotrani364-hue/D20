@@ -30,10 +30,11 @@ public class catalogoServlet extends HttpServlet {
 			
 			request.setAttribute("prodotti", prodotti);
 		} catch ( SQLException e) {
+			e.printStackTrace();
 			request.setAttribute("error", "errore nel caricamento dl catalogo");
 		}
 		
-		RequestDispatcher dispatcher= request.getRequestDispatcher("catalogo.jsp");
+		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/view/catalogo.jsp");
 		dispatcher.forward(request, response);
 	}
 
