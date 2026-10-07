@@ -1,7 +1,6 @@
 package model;
 
 import java.io.Serializable;
-import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,7 @@ public class ordineBean implements Serializable {
 	private int idutente;
 	private String indirizzoSpedizione;
 	private float totale;
-	private Timestamp dataOrdine;
+	private java.sql.Timestamp dataOrdine;
 	private List<dettaglioOrdineBean> articoli;
 	
 	public ordineBean() {
@@ -41,12 +40,12 @@ public class ordineBean implements Serializable {
 		this.idutente = idutente;
 	}
 
-	public Timestamp getDataOrdine() {
+	public java.sql.Timestamp getDataOrdine() {
 		return dataOrdine;
 	}
 
-	public void setDataOrdine(Timestamp dataOrdine) {
-		this.dataOrdine = dataOrdine;
+	public void setDataOrdine(java.sql.Timestamp timestamp) {
+		this.dataOrdine = timestamp;
 	}
 
 	public float getTotale() {
